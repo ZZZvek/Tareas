@@ -1,7 +1,12 @@
+from typing import List
+from Paciente.cl_paciente import Paciente
+from Médico.cl_medico import Medico
+from Consulta.cl_consultas import consulta
+
 class Hospital:
-    pacientes = []
-    medicos = []
-    consultas = []
+    pacientes: List[Paciente] = []
+    medicos: List[Medico] = []
+    consultas: List[consulta] = []
     
     def registrar_paciente(self, paciente):
         self.pacientes.append(paciente)
@@ -45,23 +50,23 @@ class Hospital:
         return 
     
     def mostrar_pacientes(self):
-        print("Pacientes en el Sistema")
+        print("\nPacientes en el Sistema:\n")
         for paciente in self.pacientes:
             paciente.mostrar_informacion()
             
     def mostrar_medicos(self):
-        print("Médicos en el sistema\n")
+        print("\nMédicos en el sistema:\n")
         for medico in self.medicos:
             medico.mostrar_informacion()
             
     def mostrar_pacientes_menores(self):
-        print("-------------Pacientes menores en el sistema---------\n")
+        print("\nPacientes menores en el sistema:\n")
         for paciente in self.pacientes:
             if (2024-paciente.ano_nacimiento) < 18:
                 paciente.mostrar_informacion()
 
     def mostrar_pacientes_mayores(self):
-        print("-------------Pacientes mayores en el sistema---------\n")
+        print("\nPacientes mayores en el sistema:\n")
         for paciente in self.pacientes:
             if (2024-paciente.ano_nacimiento) >= 18:
                 paciente.mostrar_informacion()

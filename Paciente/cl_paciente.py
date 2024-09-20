@@ -1,7 +1,5 @@
 import random
 
-
-
 class Paciente:
     id: int
     nombre: str

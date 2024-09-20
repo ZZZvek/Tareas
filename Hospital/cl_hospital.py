@@ -2,11 +2,13 @@ from typing import List
 from Paciente.cl_paciente import Paciente
 from Médico.cl_medico import Medico
 from Consulta.cl_consultas import consulta
+from validador_hospital import validadorHospital
 
 class Hospital:
     pacientes: List[Paciente] = []
     medicos: List[Medico] = []
     consultas: List[consulta] = []
+    validador_hospital = validadorHospital
     
     def registrar_paciente(self, paciente):
         self.pacientes.append(paciente)
@@ -14,35 +16,12 @@ class Hospital:
     def registrar_medico(self, medico):
         self.medicos.append(medico)
         
-    def validar_existencia_paciente(self, id_paciente):
-        for paciente in self.pacientes:
-            if paciente.id == id_paciente:
-                return True
-        return False
-    
-    def validar_existencia_medico(self, id_medico):
-        for medico in self.medicos:
-            if medico.id == id_medico:
-                return True
-        return False
-    
-    def val_cant_usuarios(self):
-        if len(self.pacientes) == 0:
-            print("No puedes registrar una consulta, no hay pacientes.")
-            return False
-            
-        if len(self.medicos) == 0:
-            print("Mo puedes registrar una consulta, no hay médicos.")
-            return False
-        
-        return True
-        
     #Registar Consulta
     def registrar_consulta(self, id_medico, id_paciente):
-        if not self.val_cant_usuarios():
-            return
+        if not self.validador_hospital.val_cant_usuarios(lista_medicos=self.medicos, lista_pacientes=self.pacientes):
+            pass
         
-        if self.validar_existencia_medico(id_medico) == False or self.validar_existencia_paciente(id_paciente) == False :
+        if self.val == False or self.validar_existencia_paciente(id_paciente) == False :
             print("Nose puede registrar la consulta, no existe el médico o paciente.")
             return
         

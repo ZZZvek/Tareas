@@ -20,7 +20,7 @@ class Estudiante:
     def mostrar_info_estudiante(self):
         nombre_completo = f"{self.es_nombre} {self.es_apellido}"
         info = f"""Número de control: {self.es_numero_control}
-        Nombre completo: {nombre_completo}
-        CURP: {self.es_curp}
-        Fecha de nacimiento: {self.es_fecha_nacimiento}"""
+Nombre completo: {nombre_completo}
+CURP: {self.es_curp}
+Fecha de nacimiento: {self.es_fecha_nacimiento}"""
         return info

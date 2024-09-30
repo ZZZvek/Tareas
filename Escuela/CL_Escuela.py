@@ -5,13 +5,17 @@ from Estudiantes.CL_Estudiante import Estudiante
 from Grupos.CL_Grupo import Grupo
 from Maestros.CL_Maestro import Maestro
 from Materias.CL_Materia import Materia
+from Carrera.CL_Carrera import Carrera
+from Semestre.CL_Semestre import Semestre
 
 class Escuela:
     lista_estudiantes: List[Estudiante] = []
     lista_grupos: List[Grupo] = []
     lista_maestros: List[Maestro] = []
     lista_materias: List[Materia] = []
-    
+    lista_carreras: List[Carrera] = []
+    lista_semestres: List[Semestre] = []
+
     def reg_estudiante(self, estudianteReg: Estudiante):
         self.lista_estudiantes.append(estudianteReg)
         
@@ -20,7 +24,29 @@ class Escuela:
         
     def reg_materia(self, materiaReg:Materia):
         self.lista_materias.append(materiaReg)
+
+    def reg_carrera(self, carreraReg:Carrera):
+        self.lista_carreras.append(carreraReg)
         
+    def reg_semestre(self, semestreReg:Semestre):
+        id_carrera = semestreReg.sem_mat_carrera
+        for Carrera in self.lista_carreras:
+            if Carrera.ca_matricula == id_carrera:
+                Carrera.reg_semestre(semestre=semestreReg)
+                break
+
+        self.lista_semestres.append(semestreReg)
+
+    def reg_grupo(self, grupoReg:Grupo):
+        id_semestre = grupoReg.gr_id_semestre
+
+        for Semestre in self.lista_semestres:
+            if id_semestre == Semestre.ID:
+                Semestre.reg_grupo_sem(grupo=grupoReg)
+                break
+
+        self.lista_grupos.append(grupoReg)
+
     def gen_num_control_estudiante(self):
         num_control_estudiante = f"L{datetime.now().year}{datetime.now().month}{len(self.lista_estudiantes) + 1}{randint(0,10000)}"
         
@@ -57,6 +83,24 @@ class Escuela:
             print(maestro.mostrar_info_maestro())
             return
     
+    def listar_carreras(self):
+        print("-----CARRERAS-----")
+        for carrera in self.lista_carreras:
+            print(carrera.mostrar_info_carrera())
+            return
+        
+    def listar_semestres(self):
+        print("-----SEMESTRES-----")
+        for semestre in self.lista_semestres:
+            print(semestre.mostrar_info_semestre())
+            return
+        
+    def listar_grupos(self):
+        print("-----GRUPOS-----")
+        for grupo in self.lista_grupos:
+            print(grupo.mostrar_info_grupo())
+            return
+        
     def listar_materias(self):
         print("-----MATERIAS-----")
         for materia in self.lista_materias:

@@ -14,8 +14,8 @@ class Materia:
         
     def mostrar_info_materia(self):
         info = f"""Número de control: {self.num_c_materia}
-        Nombre: {self.mt_nombre}
-        Descripción: {self.descripcion}
-        Semestre: {self.semestre}
-        Créditos: {self.creditos}"""
+Nombre: {self.mt_nombre}
+Descripción: {self.descripcion}
+Semestre: {self.semestre}
+Créditos: {self.creditos}"""
         return info

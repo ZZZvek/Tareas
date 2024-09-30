@@ -2,6 +2,9 @@ from Escuela.CL_Escuela import Escuela
 from Estudiantes.CL_Estudiante import Estudiante
 from Maestros.CL_Maestro import Maestro
 from Materias.CL_Materia import Materia
+from Carrera.CL_Carrera import Carrera
+from Semestre.CL_Semestre import Semestre
+from Grupos.CL_Grupo import Grupo
 from datetime import datetime
 
 escuela = Escuela()
@@ -13,16 +16,20 @@ while True:
           2. Registrar maestro
           3. Registrar materia
           4. Registrar grupo
-          5. Registrar Horario
-          6. Mostrar estudiantes
-          7. Mostrar maestros
-          8. Mostrar materias
-          9. Mostrar grupos
-          10. Eliminar estudiante
-          11. Eliminar maestro
-          12. Eliminar materia
-          13. Eliminar grupo
-          14. Salir""")
+          5. Registrar horario
+          6. Registrar carrera
+          7. Registrar semestre
+          8. Mostrar estudiantes
+          9. Mostrar maestros
+          10. Mostrar materias
+          11. Mostrar carreras
+          12. Mostrar semestres
+          13. Mostrar grupos
+          14. Eliminar estudiante
+          15. Eliminar maestro
+          16. Eliminar materia
+          17. Eliminar grupo
+          18. Salir""")
     
     opcion = input("Ingresa la función a realizar: ")
     
@@ -83,43 +90,69 @@ while True:
               Número de control: {gen_numero_control_materia}""")
         
     elif opcion == "4":
-        pass
-
-
-
-    elif opcion == "5":
-        pass
-
+        print(""""\n-----Registrar grupo-----""")
+        tipo = input("Ingresa el tipo de grupo (A ó B):")
+        id_semestre = input("Ingresa el Id del semestre al que pertenece: ")
+        grupo = Grupo(tipo=tipo, id_semestre=id_semestre)
+        escuela.reg_grupo(grupo)
+        print(f"""\nGrupo registrado correctamente.
+              ID Grupo: {grupo.ID}""")
 
 
     elif opcion == "6":
-        escuela.listar_estudiantes()
+        print(""""\n-----Registrar carrera-----""")
+        nombre_carrera = input("\nIngresa el nombre de la carrera: ")
+        carrera = Carrera(nom_carrera=nombre_carrera)
+        gen_matricula = carrera.gen_matricula(carrera)
+        escuela.reg_carrera(carrera)
+        print(f"""\nCarrera registrada correctamente.
+              Matrícula: {carrera.ca_matricula}""")
 
     elif opcion == "7":
-        escuela.listar_maestros()
+        print(""""\n-----Registrar semestre-----""")
+        num_semestre = input("Ingresa el número de semestre: ")
+        id_carrera = input("Ingresa el ID de la carrera: ")
+        _semestre =  Semestre(numero=num_semestre, id_carrera=id_carrera)
+        gen_id_semestre = _semestre.gen_id_sem(_semestre)
+        escuela.reg_semestre(_semestre)
+        print(f"""\nSemestre registrado correctamente.
+              ID Semestre: {_semestre.ID}""")
 
     elif opcion == "8":
-        escuela.listar_materias()
+        escuela.listar_estudiantes()
 
-
+    elif opcion == "9":
+        escuela.listar_maestros()
 
     elif opcion == "10":
+        escuela.listar_materias()
+
+    elif opcion == "11":
+        escuela.listar_carreras()
+
+    elif opcion == "12":
+        escuela.listar_semestres()
+
+    elif opcion == "13":
+        escuela.listar_grupos()
+
+    elif opcion == "14":
         print("\n-----Eliminar estudiante-----")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_estudiante(numero_control=numero_control)
         print("-----Estudiante eliminado correctamente-----")
 
-    elif opcion == "11":
+    elif opcion == "15":
         print("\n-----Eliminar maestro-----")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_maestro(numero_control=numero_control)
         print("-----Maestro eliminado correctamente-----")
 
-    elif opcion == "12":
+    elif opcion == "16":
         print("\n-----Eliminar materia-----")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_materia(numero_control=numero_control)
         print("-----Materia eliminada correctamente-----")
 
-    elif opcion == "12":
+    elif opcion == "15":
         pass

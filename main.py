@@ -31,17 +31,17 @@ while True:
           17. Eliminar grupo
           18. Salir""")
     
-    opcion = input("Ingresa la función a realizar: ")
+    opcion = input("\nIngresa la función a realizar: ")
     
     if opcion == "1":
-        print(""""\n-----Registrar Estudiante-----""")
+        print(""""\n-----Registrar Estudiante-----\n""")
                 
         nombre = input("\nIngresa el nombre del estudiante: ")
         apellido = input("Ingresa el apellido del estudiante: ")
         curp = input("Ingresa la CURP del estudiante: ")
         ano = int(input("Ingresa el año de nacimiento: "))
         dia = int(input("Ingresa el dia de nacimiento: "))
-        mes = int(input("Ingresa el mes de nacimiento: "))
+        mes = int(input("Ingresa el mes de nacimiento: \n"))
         fecha_nacimiento = datetime(ano, mes, dia)
         
         gen_num_control_estudiante = escuela.gen_num_control_estudiante()
@@ -51,8 +51,8 @@ while True:
         escuela.reg_estudiante(estudianteReg=estudiante_)
         
 
-        print(f"""/nEstudiante registrado correctamente.
-              Número de control: {gen_num_control_estudiante}""")
+        print(f"""\nEstudiante registrado correctamente.
+Número de control: {gen_num_control_estudiante}""")
         
         
     elif opcion == "2":
@@ -62,7 +62,7 @@ while True:
         apellido = input("Ingresa el apellido del maestro: ")
         ano_nacimiento = input("Ingresa el año de nacimiento: ")
         rfc = input("Ingresa el RFC del maestro: ")
-        sueldo = int(input("Ingresa el sueldo: "))
+        sueldo = int(input("Ingresa el sueldo: \n"))
         
         maestro_ = Maestro(numero_control="", nombre=nombre, apellido=apellido, sueldo=sueldo, rfc=rfc, ano_nacimiento=ano_nacimiento)
         gen_numero_control_maestro = escuela.gen_num_control_maestro(maestro_)
@@ -70,7 +70,7 @@ while True:
         escuela.reg_maestro(maestro_)
         
         print(f"""\nMaestro registrado correctamente.
-              Número de control: {gen_numero_control_maestro}""")
+Número de control: {gen_numero_control_maestro}""")
         
     elif opcion == "3":
         
@@ -79,7 +79,7 @@ while True:
         nombre_materia = input("\nIngresa el nombre de la materia: ")
         descripcion = input("Ingresa la descripción: ")
         semestre = input("Ingresa el semestre: ")
-        creditos = input("Ingresa los creditos: ")
+        creditos = input("Ingresa los creditos: \n")
         
         materia_ = Materia(num_materia="", nombre=nombre_materia, descripcion=descripcion, semestre=semestre, creditos=creditos)
         gen_numero_control_materia = escuela.gen_num_control_materia(materia_)
@@ -87,16 +87,16 @@ while True:
         escuela.reg_materia(materia_)
         
         print(f"""\nMateria registrada correctamente.
-              Número de control: {gen_numero_control_materia}""")
+Número de control: {gen_numero_control_materia}""")
         
     elif opcion == "4":
         print(""""\n-----Registrar grupo-----""")
         tipo = input("Ingresa el tipo de grupo (A ó B):")
-        id_semestre = input("Ingresa el Id del semestre al que pertenece: ")
+        id_semestre = input("Ingresa el Id del semestre al que pertenece: \n")
         grupo = Grupo(tipo=tipo, id_semestre=id_semestre)
         escuela.reg_grupo(grupo)
         print(f"""\nGrupo registrado correctamente.
-              ID Grupo: {grupo.ID}""")
+ID Grupo: {grupo.ID}""")
 
 
     elif opcion == "6":
@@ -106,17 +106,18 @@ while True:
         gen_matricula = carrera.gen_matricula(carrera)
         escuela.reg_carrera(carrera)
         print(f"""\nCarrera registrada correctamente.
+              
               Matrícula: {carrera.ca_matricula}""")
 
     elif opcion == "7":
         print(""""\n-----Registrar semestre-----""")
         num_semestre = input("Ingresa el número de semestre: ")
-        id_carrera = input("Ingresa el ID de la carrera: ")
+        id_carrera = input("Ingresa el ID de la carrera: \n")
         _semestre =  Semestre(numero=num_semestre, id_carrera=id_carrera)
         gen_id_semestre = _semestre.gen_id_sem(_semestre)
         escuela.reg_semestre(_semestre)
         print(f"""\nSemestre registrado correctamente.
-              ID Semestre: {_semestre.ID}""")
+ID Semestre: {_semestre.ID}""")
 
     elif opcion == "8":
         escuela.listar_estudiantes()
@@ -137,19 +138,19 @@ while True:
         escuela.listar_grupos()
 
     elif opcion == "14":
-        print("\n-----Eliminar estudiante-----")
+        print("\n-----Eliminar estudiante-----\n")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_estudiante(numero_control=numero_control)
         print("-----Estudiante eliminado correctamente-----")
 
     elif opcion == "15":
-        print("\n-----Eliminar maestro-----")
+        print("\n-----Eliminar maestro-----\n")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_maestro(numero_control=numero_control)
         print("-----Maestro eliminado correctamente-----")
 
     elif opcion == "16":
-        print("\n-----Eliminar materia-----")
+        print("\n-----Eliminar materia-----\n")
         numero_control = input("Ingresa el número de control: ")
         escuela.eliminar_materia(numero_control=numero_control)
         print("-----Materia eliminada correctamente-----")

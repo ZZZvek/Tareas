@@ -1,1 +1,1 @@
-![Mostrar info estudiante](./main/GIF 1.gif)
+![Mostrar info estudiante](./main/GIF_1.gif)

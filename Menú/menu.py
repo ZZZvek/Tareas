@@ -64,12 +64,16 @@ class Menu:
         
     def mostrar_menu_estudiante(self):
         opcion = 0
-        while opcion != 3:
+        while opcion != 4:
             print("""------TEC DE MORELIA------
 1. Ver horarios.
-2. Ver grupos
-3. Salir""")
+2. Ver grupos.
+4. Ver grupos.
+4. Salir""")
             opcion = input("Ingresa una opción: ")
+            
+            if opcion == "4":
+                self.escuela.ver_grupos_asignados_a_estudiante()
             
             if opcion == "3":
                 break
@@ -152,8 +156,15 @@ class Menu:
                 descripcion = input("Ingresa la descripción: ")
                 semestre = input("Ingresa el semestre: ")
                 creditos = input("Ingresa los creditos: ")
+                num_control_maestro = input("Ingresa el número de control del maestro asignado a este grupo: ")
                 
-                materia_ = Materia(num_materia="", nombre=nombre_materia, descripcion=descripcion, semestre=semestre, creditos=creditos)
+                maestro = self.escuela.buscar_maestro_num_control(num_control_maestro=num_control_maestro)
+                
+                if maestro is None:
+                    print("No existe el maestro con ese número de control.")
+                    return
+                
+                materia_ = Materia(num_materia="", nombre=nombre_materia, descripcion=descripcion, semestre=semestre, creditos=creditos, maestro=maestro)
                 gen_numero_control_materia = self.escuela.gen_num_control_materia(materia_)
                 materia_.num_c_materia = gen_numero_control_materia
                 self.escuela.reg_materia(materia_)

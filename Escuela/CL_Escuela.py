@@ -151,3 +151,51 @@ class Escuela:
                 if usuario.contraseña == contraseña:
                     return usuario
         return None
+    
+    def buscar_estudiante_id(self, num_control_estudiante: str):
+        for estudiante in self.lista_estudiantes:
+            if estudiante.numero_control == num_control_estudiante:
+                return estudiante
+            
+        return None
+    
+    def buscar_maestro_num_control(self, num_control_maestro: str):
+        for maestro in self.lista_maestros:
+            if maestro.numero_control == num_control_maestro:
+                return maestro
+    
+    def buscar_grupo_id(self, id_grupo):
+        for grupo in self.lista_grupos:
+            if grupo.ID == id_grupo:
+                return grupo
+            
+        return None
+    
+    def reg_alumno_grupo(self, num_control_estudiante: str, id_grupo: str):
+        estudiante = self.buscar_estudiante_id(
+            num_control_estudiante=num_control_estudiante
+        )
+        
+        if estudiante is None:
+            print("El alumno especificado no se encuentra registrado.")
+            return
+        
+        grupo = self.buscar_grupo_id(id_grupo=id_grupo)
+        
+        if grupo is None:
+            print("Nose encontró el grupo buscado.")
+            
+        grupo.reg_estudiante(estudiante=estudiante)
+        print("Estudiante asignado correctamente.")
+        
+    def ver_grupos_asignados_a_estudiante(self, num_control_estudiante: str):
+        estudiante = self.buscar_estudiante_id(
+            num_control_estudiante=num_control_estudiante
+        )
+        
+        if estudiante is None:
+            print("El alumno especificado no se encuentra registrado.")
+            return
+        
+        for grupo in self.lista_grupos:
+            grupo.mostrar_info_grupo_estudiante()

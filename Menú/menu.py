@@ -7,16 +7,11 @@ from Semestre.CL_Semestre import Semestre
 from Grupos.CL_Grupo import Grupo
 from datetime import datetime
 from Usuario.utils.Roles import Roles
+from Usuario.CL_Usuario import Usuario
 
 class Menu:
     
     escuela: Escuela = Escuela()
-    
-    usuario_estudiante: str = "ZZZ"
-    contraseña_estudiante: str = "1234"
-    
-    usuario_maestro: str = "GuizarBB"
-    contraseña_maestro: str = "12345"
     
     def login(self):
         intentos = 0
@@ -33,38 +28,31 @@ class Menu:
             usuario = self.escuela.validar_inicio_sesion(num_control=num_contorl, contraseña=contraseña_usuario)
             
             if usuario is None:
-                pass
+                intentos = self.mostrar_intentos_fallidos(intentos_usuario=intentos)
             else:
                 if usuario.rol == Roles.ESTUDIANTE:
-                    self.mostrar_menu_estudiante()
+                    print("\n***ESTUDIANTE***")
+                    self.mostrar_menu_estudiante(usuario)
                     intentos = 0
-                elif usuario.rol == Roles.MAESTRO():
+                elif usuario.rol == Roles.MAESTRO:
+                    print("\n***MAESTRO***")
+                    self.mostrar_menu_maestro(usuario)
                     intentos = 0
                 else:
+                    print("\n***COORDINADOR***")
                     self.mostrar_menu()
                     intentos = 0
-            
-            # if nombre_usuario == self.usuario_estudiante:
-            #     if contraseña_usuario == self.contraseña_estudiante:
-            #         self.mostrar_menu_estudiante()
-            #         intentos = 0
-            #     else:
-            #         print("Nombre o contraseña incorrectos")
-            #         intentos += 1
-                
-            # if nombre_usuario == self.usuario_maestro:
-            #     if contraseña_usuario == self.contraseña_maestro:
-            #         self.mostrar_menu_maestro()
-            #         intentos = 0
-            #     else:
-            #         print("Nombre o contraseña incorrectos")
-            #         intentos += 1
-                    
+
         print("Intentos máximos alcanzados, bye.")
+
+    def mostrar_intentos_fallidos(self, intentos_usuario):
+        print("\nUsuario o contraseña incorrectos, intenta de nuevo.")
+        return intentos_usuario + 1
         
-    def mostrar_menu_estudiante(self):
+    def mostrar_menu_estudiante(self, usuario):
         opcion = 0
         while opcion != 4:
+<<<<<<< HEAD
             print("""------TEC DE MORELIA------
 1. Ver horarios.
 2. Ver grupos.
@@ -76,11 +64,39 @@ class Menu:
                 self.escuela.ver_grupos_asignados_a_estudiante()
             
             if opcion == "3":
+=======
+            print("""\n---TEC DE MORELIA---
+\n1. Ver horarios.
+2. Ver grupos
+3. Mostrar info
+4. Salir""")
+            
+            opcion = int(input("\nIngresa una opción: "))
+            
+            if opcion == 3:
+                print(usuario.mostrar_info_estudiante())
+
+            if opcion == 4:
+>>>>>>> f013a579a8624fb08bca580c59d2b5f47a2cd229
                 break
+
+    def mostrar_menu_maestro(self, usuario):
+        opcion = 0
+        while opcion != 6:
+            print("""\n---TEC DE MORELIA---
+\n1. Ver horarios.
+2. Ver grupos
+3. Ver Materias
+4. Ver Alumnos
+5. Mostar info
+6. Salir""")
+            opcion = int(input("\nIngresa una opción: "))
             
+            if opcion == 5:
+                print(usuario.mostrar_info_maestro())
             
-    def mostrar_menu_maestro(self):
-        print("Menú Maestro")
+            if opcion == 6:
+                break
         
     def mostrar_menu(self):
         while True:

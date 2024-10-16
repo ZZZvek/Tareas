@@ -21,15 +21,36 @@ class Escuela:
     
     def __init__(self):
         coordinador = Coordinador(
-            co_numero_control= "1234",
+            co_numero_control= "123",
             co_nombre= "Nico",
             co_apellido= "Ponciano",
-            co_contraseña= "12345",
+            co_contraseña= "123",
             co_sueldo= 1000,
             co_rfc= "QWERTY",
             co_antiguedad= 15   
         )
         self.lista_usuario.append(coordinador)
+
+        estudiante = Estudiante(
+            numero_control="456",
+            nombre="Kevin",
+            apellido="García",
+            curp="GAHK",
+            f_nacimiento=datetime(2003,12,20),
+            contraseña="456"
+        )
+        self.lista_usuario.append(estudiante)
+
+        maestro = Maestro(
+            ma_numero_control="789",
+            ma_nombre="Oscar",
+            ma_apellido="Coronado",
+            sueldo=3000,
+            rfc="OSCGOS",
+            ano_nacimiento="1990",
+            contraseña="789"
+        )
+        self.lista_usuario.append(maestro)
 
     def reg_estudiante(self, estudianteReg: Estudiante):
         self.lista_usuario.append(estudianteReg)

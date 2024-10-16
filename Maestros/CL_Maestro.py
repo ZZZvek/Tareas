@@ -16,7 +16,7 @@ class Maestro(Usuario):
         
     def mostrar_info_maestro(self):
         nombre_completo = f"{self.nombre} {self.apellido}"
-        info = f"""\nNúmero de control: {self.numero_control}
+        info = f"""Número de control: {self.numero_control}
 Nombre completo: {nombre_completo}
 RFC: {self.ma_rfc}
 Año de nacimiento: {self.ma_ano_nacimiento}

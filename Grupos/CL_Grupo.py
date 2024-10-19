@@ -1,13 +1,11 @@
 from typing import List
 from random import randint
 from Estudiantes.CL_Estudiante import Estudiante
-from Maestros.CL_Maestro import Maestro
 from Materias.CL_Materia import Materia
 
 class Grupo:
     ID: str
     gr_alumnos: List[Estudiante] = []
-    gr_maestro: List[Maestro] = []
     gr_materias: List[Materia] = []
     gr_id_semestre: str
     tipo: chr
@@ -26,3 +24,19 @@ class Grupo:
 Tipo: {self.tipo}
 ID del Semestre: {self.gr_id_semestre}"""
         return info
+    
+    def reg_estudiante(self, estudiante: Estudiante):
+        self.gr_alumnos.append(estudiante)
+        
+    def reg_materia(self, materia: Materia):
+        self.gr_materias.append(materia)
+        
+    def mostrar_info_grupo_estudiante(self):
+        print(f"""Información del grupo:
+Tipo: {self.tipo}
+Semestre: {self.gr_id_semestre}""")
+        
+        for materia in self.gr_materias:
+            print(materia.mostrar_info_materia())
+        
+        pass

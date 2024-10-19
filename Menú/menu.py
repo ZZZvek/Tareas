@@ -7,11 +7,16 @@ from Semestre.CL_Semestre import Semestre
 from Grupos.CL_Grupo import Grupo
 from datetime import datetime
 from Usuario.utils.Roles import Roles
-from Usuario.CL_Usuario import Usuario
 
 class Menu:
     
     escuela: Escuela = Escuela()
+    
+    usuario_estudiante: str = "ZZZ"
+    contraseña_estudiante: str = "1234"
+    
+    usuario_maestro: str = "GuizarBB"
+    contraseña_maestro: str = "12345"
     
     def login(self):
         intentos = 0
@@ -28,61 +33,54 @@ class Menu:
             usuario = self.escuela.validar_inicio_sesion(num_control=num_contorl, contraseña=contraseña_usuario)
             
             if usuario is None:
-                intentos = self.mostrar_intentos_fallidos(intentos_usuario=intentos)
+                pass
             else:
                 if usuario.rol == Roles.ESTUDIANTE:
-                    print("\n***ESTUDIANTE***")
-                    self.mostrar_menu_estudiante(usuario)
+                    self.mostrar_menu_estudiante()
                     intentos = 0
-                elif usuario.rol == Roles.MAESTRO:
-                    print("\n***MAESTRO***")
-                    self.mostrar_menu_maestro(usuario)
+                elif usuario.rol == Roles.MAESTRO():
                     intentos = 0
                 else:
-                    print("\n***COORDINADOR***")
                     self.mostrar_menu()
                     intentos = 0
-
+            
+            # if nombre_usuario == self.usuario_estudiante:
+            #     if contraseña_usuario == self.contraseña_estudiante:
+            #         self.mostrar_menu_estudiante()
+            #         intentos = 0
+            #     else:
+            #         print("Nombre o contraseña incorrectos")
+            #         intentos += 1
+                
+            # if nombre_usuario == self.usuario_maestro:
+            #     if contraseña_usuario == self.contraseña_maestro:
+            #         self.mostrar_menu_maestro()
+            #         intentos = 0
+            #     else:
+            #         print("Nombre o contraseña incorrectos")
+            #         intentos += 1
+                    
         print("Intentos máximos alcanzados, bye.")
-
-    def mostrar_intentos_fallidos(self, intentos_usuario):
-        print("\nUsuario o contraseña incorrectos, intenta de nuevo.")
-        return intentos_usuario + 1
         
-    def mostrar_menu_estudiante(self, usuario):
+    def mostrar_menu_estudiante(self):
         opcion = 0
         while opcion != 4:
-            print("""\n---TEC DE MORELIA---
-\n1. Ver horarios.
-2. Ver grupos
-3. Mostrar info
+            print("""------TEC DE MORELIA------
+1. Ver horarios.
+2. Ver grupos.
+4. Ver grupos.
 4. Salir""")
+            opcion = input("Ingresa una opción: ")
             
-            opcion = int(input("\nIngresa una opción: "))
+            if opcion == "4":
+                self.escuela.ver_grupos_asignados_a_estudiante()
             
-            if opcion == 3:
-                print(usuario.mostrar_info_estudiante())
-
-            if opcion == 4:
+            if opcion == "3":
                 break
-
-    def mostrar_menu_maestro(self, usuario):
-        opcion = 0
-        while opcion != 6:
-            print("""\n---TEC DE MORELIA---
-\n1. Ver horarios.
-2. Ver grupos
-3. Ver Materias
-4. Ver Alumnos
-5. Mostar info
-6. Salir""")
-            opcion = int(input("\nIngresa una opción: "))
             
-            if opcion == 5:
-                print(usuario.mostrar_info_maestro())
             
-            if opcion == 6:
-                break
+    def mostrar_menu_maestro(self):
+        print("Menú Maestro")
         
     def mostrar_menu(self):
         while True:
@@ -158,8 +156,15 @@ class Menu:
                 descripcion = input("Ingresa la descripción: ")
                 semestre = input("Ingresa el semestre: ")
                 creditos = input("Ingresa los creditos: ")
+                num_control_maestro = input("Ingresa el número de control del maestro asignado a este grupo: ")
                 
-                materia_ = Materia(num_materia="", nombre=nombre_materia, descripcion=descripcion, semestre=semestre, creditos=creditos)
+                maestro = self.escuela.buscar_maestro_num_control(num_control_maestro=num_control_maestro)
+                
+                if maestro is None:
+                    print("No existe el maestro con ese número de control.")
+                    return
+                
+                materia_ = Materia(num_materia="", nombre=nombre_materia, descripcion=descripcion, semestre=semestre, creditos=creditos, maestro=maestro)
                 gen_numero_control_materia = self.escuela.gen_num_control_materia(materia_)
                 materia_.num_c_materia = gen_numero_control_materia
                 self.escuela.reg_materia(materia_)
